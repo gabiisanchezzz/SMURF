@@ -5,8 +5,7 @@
 calculator
   = arithmetic_expression
 
-addop
-  = '+' / '-'
+
 
   arithmetic_expression
     = left:mult_term rest:(addop mult_term)*
@@ -40,3 +39,18 @@ integer
 
 digits
 = [0-9]+
+
+addop
+  = '+' / '-'
+
+mulop
+  = '*' / '/'
+
+eol
+  = [\n\r\u2028\u2029]
+
+space 
+  = eol / [ \t]
+
+_
+  = space*
