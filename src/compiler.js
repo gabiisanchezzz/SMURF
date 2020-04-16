@@ -28,10 +28,13 @@
 import Interpreter from "./interpreter.js"
 import * as AST from "./ast.js"
 
-export default function compileAndRun(grammar, script, printFunction) 
+export default function compileAndRun(grammar, script, printFunction)
 {
   let visitor = new Interpreter()
-  let result = grammar.parse(script, {AST: AST}).accept(visitor)
+  let result = grammar.parse(script, {AST: AST})
+console.dir(result)
+result = result.accept(visitor)
+console.dir(result)
 
   return result// ... the value returned by executing the SMURF script
 }

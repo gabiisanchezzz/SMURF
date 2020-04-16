@@ -8,7 +8,7 @@ calculator
 
 
   arithmetic_expression
-    = left:mult_term rest:(addop mult_term)*
+    = left:mult_term rest:(addop _ mult_term)*
     { return rest.reduce(
       (result, [op, _, right]) => new AST.BinOp(result, op, right),
       left
@@ -17,7 +17,7 @@ calculator
 
 
 mult_term
-= left:integer "*" rest:mult_term
+= left:integer rest:("*" _ mult_term)*
 {
   return rest.reduce(
     (result, [op, _, right]) => new AST.BinOp(result, op, right),
@@ -33,9 +33,8 @@ primary
 
 integer
 = plusOrMinus:("+" / "-")? digits:digits
-{
-  return new AST.Integer(parseInt(plusOrMinus, digits.join(""), 10))
-}
+  { return new AST.Integer(parseInt(text(), 10)) }
+
 
 digits
 = [0-9]+
@@ -49,7 +48,7 @@ mulop
 eol
   = [\n\r\u2028\u2029]
 
-space 
+space
   = eol / [ \t]
 
 _
