@@ -1,3 +1,24 @@
+# Week 2
+
+| Part           | Comments    | Points |
+|----------------|-------------|--------|
+| provided tests | 6 passed    |     12 |
+| extras         |             |      0 |
+| Coding         |             |     15 |
+| **TOTAL**      |             |     27 |
+
+
+So, technically no tests ran, because you seem to have closed the
+Interpreter class early, on line 40. I moved the closing brace down to
+the bottom and tried again.
+
+I also fixed the import statement at the top of the file (adding a .js`)
+
+I then tried some simple expressions. It worked on plain numbers, but
+`1+2` caused it to blow up.
+
+
+
 # Week 1
 
 | Part           | Comments    | Points |
