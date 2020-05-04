@@ -2,6 +2,65 @@
 
 | Part           | Comments    | Points |
 |----------------|-------------|--------|
+| provided tests | 1 failure   |     63 |
+| extras         | 0 failures  |     10 |  ** wow! **
+| Coding         |             |     20 |
+| **TOTAL**      |             |     93 |
+
+Just two comments on the code:
+
+File: Interpreter.js
+53:       if (args.length > 0) {
+54:         params.forEach((param, i) => {
+55:           params[i] = param[2].accept(this)
+56:         })
+57:
+58:         args.forEach((arg, i) => {
+59:           args[i] = arg[2].accept(this)
+60:         })
+61:
+62:         if (params.length != args.length) {
+63:           throw new Error("Parameters and arguments are not equal in length")
+64:         }
+65:
+66:         params.forEach((param, i) => {
+67:           newBinding.setVariable(param, args[i])
+68:         })
+69:       }
+
+This works, but
+
+1. Why do you need the test for length > 0?
+
+2. Why three loops. Could you not have just one?
+
+    for (let i = 0; i < params.length; i++) {
+      let name = params[i].accept(this)
+      let value = args[i].accept(this)
+      newBinding.setVariable(name, value)
+    }
+
+3. In general overwriting data in things that were passed to you is poor
+   form :)
+
+In addition, there's a bug: if there are no arguments in the call, then
+the test on line 62 never gets called, and so if the function is
+actually defined to take parameters, no error will be reported.
+
+
+File: Interpreter.js
+74:       while (this.binding.parent != null) {
+75:         this.binding = this.binding.pop()
+76:       }
+77:       return code
+
+Here you seem to be taking _all_ the bindings, but all you need to do it
+pop off the one you just pushed.
+
+# Week 2
+
+| Part           | Comments    | Points |
+|----------------|-------------|--------|
 | provided tests | 6 passed    |     12 |
 | extras         |             |      0 |
 | Coding         |             |     15 |
