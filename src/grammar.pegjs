@@ -85,8 +85,6 @@ boolean_expression
 
 //////////////////////////////// arithmetic expression /////////////////////////////
 
-//////////////////////////////// arithmetic expression /////////////////////////////
-
 arithmentic_expression
   = head:mult_term rest:(addop mult_term)*
     { return rollupBinOp(head, rest) }
@@ -125,8 +123,7 @@ relop
 function_call
   = 'print' _ '(' _ args:call_arguments _ ')'
     { return new AST.InternalPrint(args) }
-
-  / name:variable_value "(" _ args:call_arguments _ ")"
+    / name:variable_value "(" _ args:call_arguments _ ")"
     { return new AST.FunctionCall(name, args) }
 
 call_arguments

@@ -52,11 +52,11 @@ export default class Interpreter {
       let params = thunk.formals
       if (args.length > 0) {
         params.forEach((param, i) => {
-          params[i] = param[2].accept(this) //the 3rd element of each param is the actual arg, without the optional "," and _
+          params[i] = param[2].accept(this)
         })
   
         args.forEach((arg, i) => {
-          args[i] = arg[2].accept(this) //the 3rd element of each arg is the actual arg, without the optional "," and _
+          args[i] = arg[2].accept(this) 
         })
 
         if (params.length != args.length) {
@@ -93,7 +93,8 @@ export default class Interpreter {
   IntegerValue(node) {
     return node.value
   }
-
+  //not sure why this test isnt running
+  //tried changing way i declared a but had no luck
   InternalPrint(node) {
     let args = node.args.map(a => a.accept(this).toString() )
     this.printFunction(args)
